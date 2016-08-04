@@ -13,7 +13,36 @@
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 
+// takes an array of values and returns an array of all that array's permutations
+window.permutate = function(array) {
+  var results = [];
 
+  var swap = function(array, i, j) {
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  };
+
+  var recursivePermutate = function(array, index) {
+    if (index === array.length) {
+      results.push(array.slice());
+      return;
+    }
+
+    for (var j = index; j < array.length; j++) {
+      swap(array, index, j);
+      recursivePermutate(array, index + 1);
+      swap(array, index, j);
+    }
+  };
+  recursivePermutate(array, 0);
+  return results;
+};
+
+// Takes in a chess board configuration and returns a boolean on conflict
+window.validator = function() {
+
+};
 
 window.findNRooksSolution = function(n) {
   var solution = undefined; //fixme
@@ -40,7 +69,7 @@ window.findNQueensSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
-  var solution = undefined; //fixme
+  var solution = function () {}; //fixme
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
